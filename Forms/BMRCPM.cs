@@ -1,4 +1,5 @@
-﻿using DietCalc.Classes;
+﻿
+using Okna.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
+using System.Threading;
 
 namespace Okna.Forms
 {
@@ -15,13 +18,19 @@ namespace Okna.Forms
     {
         Account user;
         int age;
+        decimal CPM;
         public BMRCPM(Account user)
         {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("en-US");
             this.user = user;
             InitializeComponent();
+            dateTimePickerDate.CustomFormat = "dd.MM.yyyy";
+            dateTimePickerDate.Format = DateTimePickerFormat.Custom;
             age = CalculateAge();
             textBoxAge.Text = age.ToString();
             textBoxHeight.Text = user.height.ToString();
+            comboBoxActivity.Text = "Wybierz stopien aktywności";
+
         }
 
         public int CalculateAge()
@@ -41,22 +50,35 @@ namespace Okna.Forms
 
         private void buttonCalc_Click(object sender, EventArgs e)
         {
+
+
             decimal coef;
             if(comboBoxActivity.SelectedIndex == 0)
             {
-                coef = 1;
+                coef = 1.2M;
             }
             else if (comboBoxActivity.SelectedIndex == 1)
             {
-                coef = 1.5M;
+                coef = 1.6M;
             }
             else
             {
-                coef = 2;
+                coef = 2.1M;
             }
-            History history = new History(age, numericUpDownWeight.Value, coef, user.height);
+
+            History history = new History(age, Convert.ToDecimal(numericUpDownWeight.Value), dateTimePickerDate.Text, coef, user.height);
+
+            history.AddNewRecord(user.ID);
+
             textBoxBMR.Text = history.BMR.ToString() +" kcal";
             textBoxCPM.Text = history.CPM.ToString() +" kcal";
+            CPM = history.CPM;
+
+        }
+
+        private void Analyze_Click(object sender, EventArgs e)
+        {
+            new Analiza(user, CPM).Show();
         }
     }
 }

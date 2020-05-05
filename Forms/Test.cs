@@ -1,4 +1,5 @@
-﻿using DietCalc.Classes;
+﻿using Okna.Classes;
+using Okna.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

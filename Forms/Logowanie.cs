@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Okna.Forms;
+using Okna.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,6 +31,22 @@ namespace Okna
         {
             this.Close();
             ekranPowitalny.Show();
+        }
+
+        private void buttonLogin_Click(object sender, EventArgs e)
+        {
+
+            Account user = new Account(textBoxLogin.Text, textBoxPassword.Text);
+
+            if (user.VerifyLoginandPassword() == true)
+            {
+                user.SetOtherData();
+                new BMRCPM(user).Show();
+            }
+            else
+            {
+                MessageBox.Show("Zły login lub hasło", "Informacja");
+            }
         }
     }
 }

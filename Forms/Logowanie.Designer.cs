@@ -59,6 +59,7 @@
             this.buttonLogin.TabIndex = 2;
             this.buttonLogin.Text = "Zaloguj";
             this.buttonLogin.UseVisualStyleBackColor = true;
+            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
             // label1
             // 

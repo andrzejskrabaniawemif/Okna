@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,12 +48,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Account.cs" />
+    <Compile Include="Classes\Macronutritions.cs" />
+    <Compile Include="Classes\SQLConnection.cs" />
     <Compile Include="Classes\History.cs" />
     <Compile Include="Forms\BMRCPM.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\BMRCPM.Designer.cs">
       <DependentUpon>BMRCPM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Analiza.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Analiza.Designer.cs">
+      <DependentUpon>Analiza.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Wykres.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Wykres.Designer.cs">
+      <DependentUpon>Wykres.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Test.cs">
       <SubType>Form</SubType>
@@ -80,8 +95,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\Analiza.resx">
+      <DependentUpon>Analiza.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\BMRCPM.resx">
       <DependentUpon>BMRCPM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Wykres.resx">
+      <DependentUpon>Wykres.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EkranPowitalny.resx">
       <DependentUpon>EkranPowitalny.cs</DependentUpon>

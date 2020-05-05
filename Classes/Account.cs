@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Okna.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Web;
 using System.Windows.Forms;
 
-namespace DietCalc.Classes
+namespace Okna.Classes
+
 {
     public class Account
     {
@@ -12,8 +15,8 @@ namespace DietCalc.Classes
         public string password { get; set; }
         public string dateBirth { get; set; }
         public int gender { get; set; }
-
         public int height { get; set; }
+        public int ID { get; set; }
 
         /// <summary>
         /// uzupelnienie danych obiektu klasu Account
@@ -31,18 +34,32 @@ namespace DietCalc.Classes
             this.height = height;
         }
 
+        public Account(string login, string password)
+        {
+            this.accountID = login;
+            this.password = password;
+        }
+        
+        public void SetOtherData()
+        {
+            SQLConnection connection = new SQLConnection();
+            dateBirth = connection.GetField("dateBirth", "Users", "userLogin = '" + accountID + "'");
+            gender = Convert.ToInt32(connection.GetField("gender", "Users", "userLogin = '" + accountID + "'"));
+            height = Convert.ToInt32(connection.GetField("height", "Users", "userLogin = '" + accountID + "'"));
+        }
         /// <summary>
         /// dodanie nowego uztkownika
         /// </summary>
-        public void CreateAccount()
+        public bool CreateAccount()
         {
             if (VerifyLogin() == true)
             {
-                RunSQL(string.Format("insert into Users (login, password, dateBirth, gender, height) values {0}, {1}, {2}, {3}, {4}", accountID, password, dateBirth, gender, height));
+                return AddNewUser();
             }
             else
             {
                 MessageBox.Show("Taki login juz istnieje", "Informacja");
+                return false;
             }
         }
 
@@ -53,9 +70,11 @@ namespace DietCalc.Classes
         /// <returns></returns>
         public bool VerifyLogin()
         {
-            string userLogin = GetField("login","Users", "login = " + accountID);
+            SQLConnection connection = new SQLConnection();
 
-            if(string.IsNullOrEmpty(userLogin))
+            string userREF = connection.GetField ("REF","Users", "userLogin = '" + accountID + "'");
+
+            if(string.IsNullOrEmpty(userREF))
             {
                 return true; // nie ma takiego loginu w tabeli
             }
@@ -69,10 +88,7 @@ namespace DietCalc.Classes
         ///<param name="=query"></param>
         ///
 
-        public string RunSQL(string query)
-        {
-            return query;
-        }
+       
 
         /// <summary>
         /// sprawdza czy login istnieje w bazie i czy do danego loginu wpisane jest dobre haslo
@@ -80,7 +96,9 @@ namespace DietCalc.Classes
         /// <returns> true - login i haslo prawidlowe, false lub haslo bledne</returns>
         public bool VerifyLoginandPassword()
         {
-            string getPassword = GetField("password", "Users", "login = " + accountID); // wyciagniecie hasla przypisane do danego loginu
+            SQLConnection connection = new SQLConnection();
+
+            string getPassword = connection.GetField("userPassword", "Users", "userLogin = '" + accountID + "'"); // wyciagniecie hasla przypisane do danego loginu
 
             if (string.IsNullOrEmpty(getPassword))
             {
@@ -90,6 +108,7 @@ namespace DietCalc.Classes
             {
                 if (getPassword == password)
                 {
+                    SetUserID();
                     return true; // dane logowania prawidłowe
                 }
                 else
@@ -99,16 +118,30 @@ namespace DietCalc.Classes
             }
         }
 
-        /// <summary>
-        /// wydiagnie danych z odpowiednich tabeli
-        /// </summary>
-        /// <param name="field"></param>
-        /// <param name="table"></param>
-        /// <param name="where"></param>
-        /// <returns></returns>
-        public string GetField(string field, string table, string where)
+        public bool AddNewUser()
         {
-            return string.Format("SELECT '{0}' FROM '{1}' WHERE'{2}'", field, table, where); //wyciaganie danych z bazy
+            SQLConnection connection = new SQLConnection();
+
+            string query = string.Format("insert into Users (userLogin, userPassword, dateBirth, height, gender) values ('{0}', '{1}', '{2}', {3}, {4})", accountID, password, dateBirth, height, gender);
+
+            int result = connection.RunSQL(query);
+
+            if (result > 0)
+            {
+                SetUserID();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+       
+        public void SetUserID()
+        {
+            SQLConnection connection = new SQLConnection();
+
+            this.ID = Convert.ToInt32(connection.GetField("REF", "Users", "userLogin ='" + accountID + "'"));
         }
     }
 }

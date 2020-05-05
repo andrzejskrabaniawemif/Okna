@@ -31,7 +31,7 @@ namespace Okna
         private void buttonRegistration_Click(object sender, EventArgs e)
         {
             this.Hide();
-            new Rejestracja().Show();
+            new Rejestracja(this).Show();
         }
     }
 }

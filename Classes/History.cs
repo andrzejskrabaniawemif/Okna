@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Okna.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Runtime;
+using System.Windows.Forms;
 
-namespace DietCalc.Classes
+namespace Okna.Classes
 {
     public class History
     {
@@ -32,9 +34,9 @@ namespace DietCalc.Classes
 
             this.activity = activity;
 
-            this.BMR = CalcBMR(weight, height, activity);
+            this.BMR = CalcBMR(weight, height, activity, age);
 
-            this.CPM = CalcCPM(weight, height, activity);
+            this.CPM = CalcCPM(weight, height, activity, age);
         }
 
         /// <summary>
@@ -54,29 +56,34 @@ namespace DietCalc.Classes
 
             this.activity = activity;
 
-            this.BMR = CalcBMR(weight, height, activity);
+            this.BMR = CalcBMR(weight, height, activity, age);
 
-            this.CPM = CalcCPM(weight, height, activity);
+            this.CPM = CalcCPM(weight, height, activity, age);
         }
 
-        public decimal CalcBMR (decimal weight, int height, decimal activity)
+        public decimal CalcBMR (decimal weight, int height, decimal activity, int age)
         {
-            return weight * height * activity;
+            return (14M * weight) + (5M * height) + (7 * age);
         }
 
-        public decimal CalcCPM(decimal weight, int height, decimal activity)
+        public decimal CalcCPM(decimal weight, int height, decimal activity, int age)
         {
-            return weight * height * activity;
+            return ((14M * weight) + (5M * height) + (7 * age)) * activity;
         }
 
         /// dodanie wratosci do tabeli
-        public void DodajNowyRekord(string dataManual, Account user)
+        public void AddNewRecord(int ID)
         {
-            string data;
+            SQLConnection connection = new SQLConnection();
 
+            string query = string.Format("insert into History (userREF, userWeight, measureDate) values ({0}, {1}, '{2}')", ID, weight, date);
 
-            //odwolanie insterta do tabeli historiauzytkownika
-            //string query......
+            int result = connection.RunSQL(query);
+            if (result < 0)
+            {
+                MessageBox.Show("Nie udalo sie dodac rekordu do tabeli", "Błąd");
+            }
+
         }
     }
 }
