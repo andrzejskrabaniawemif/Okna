@@ -17,13 +17,7 @@ namespace Okna.Classes
         public decimal CPM { get; set; }
         public int age { get; set; }
 
-        /// <summary>
-        /// do daty wpisanej recznie
-        /// </summary>
-        /// <param name="weight"></param>
-        /// <param name="date"></param>
-        /// <param name="activity"></param>
-        /// <param name="user"></param>
+        
         public History(int age, decimal weight, string date, decimal activity, int height)
         {
             this.age = age;
@@ -39,14 +33,7 @@ namespace Okna.Classes
             this.CPM = CalcCPM(weight, height, activity, age);
         }
 
-        /// <summary>
-        /// do daty dnia dzisiejszego
-        /// </summary>
-        /// <param name="weight"></param>
-        /// <param name="date"></param>
-        /// <param name="activity"></param>
-        /// <param name="user"></param>
-        public History(int age, decimal weight, decimal activity, int height) //konstruktor
+       /* public History(int age, decimal weight, decimal activity, int height)
         {
             this.age = age;
 
@@ -59,7 +46,7 @@ namespace Okna.Classes
             this.BMR = CalcBMR(weight, height, activity, age);
 
             this.CPM = CalcCPM(weight, height, activity, age);
-        }
+        }*/
 
         public decimal CalcBMR (decimal weight, int height, decimal activity, int age)
         {

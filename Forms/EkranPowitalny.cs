@@ -33,5 +33,10 @@ namespace Okna
             this.Hide();
             new Rejestracja(this).Show();
         }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

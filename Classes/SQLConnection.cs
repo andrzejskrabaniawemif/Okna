@@ -8,46 +8,46 @@ using System.Collections.Specialized;
 using System.Windows.Forms;
 using System.Globalization;
 
+
 namespace Okna.Classes
 {
     class SQLConnection
     {
-        string connectionString = @"Data Source=DESKTOP-SS39255\SQLSERVER;Initial Catalog = WEMIF; Integrated Security = True"; //
+        string connectionString = @"Data Source=DESKTOP-SS39255\SQLSERVER;Initial Catalog = WEMIF; Integrated Security = True"; 
 
-        public int RunSQL(string query) //odpalanie zpaytania
+        public int RunSQL(string query)
         {
-            using (SqlConnection cn = new SqlConnection(connectionString)) //zeby nie zasmiecac programu, obiekt istnieje na czas wykonywania tego co jest w usingu
+            using (SqlConnection cn = new SqlConnection(connectionString))
             {
-                cn.Open(); //otwarcie pol z baza
+                cn.Open();
 
-                SqlCommand command = new SqlCommand(query, cn); //formuje zapytanie
+                SqlCommand command = new SqlCommand(query, cn);
 
-
-                int value = command.ExecuteNonQuery(); //odpalanie zapytania a commandzie
+                int value = command.ExecuteNonQuery();
 
                 cn.Close();
 
-                return value; //ilosc wykonan
+                return value;
             }
 
         }
 
-        public string GetField(string field, string table, string where) // pobiera wartosc pola z okreslnej tabli w okreslonej dziedzinie
+        public string GetField(string field, string table, string where)
         {
             using (SqlConnection cn = new SqlConnection(connectionString))
             {
-                string query = string.Format("SELECT {0} FROM {1} WHERE {2}", field, table, where); //formowanie zapytania
-                string value = ""; //zmienna przeochwujaca zwrocona wartosc pola
+                string query = string.Format("SELECT {0} FROM {1} WHERE {2}", field, table, where);
+                string value = "";
 
                 cn.Open();
 
                 SqlCommand command = new SqlCommand(query, cn);
 
-                SqlDataReader dataReader = command.ExecuteReader(); //tworzy obeikt klasy i przypisuje do niego odpalone zpaytanie
+                SqlDataReader dataReader = command.ExecuteReader();
 
-                if(dataReader.Read()) //jesli sa rekordy to wyciaga
+                if(dataReader.Read())
                 {
-                    value = dataReader.GetValue(0).ToString(); //przypisuje do zmiennej wartosc pola
+                    value = dataReader.GetValue(0).ToString();
                 }
 
                 cn.Close();
@@ -59,30 +59,28 @@ namespace Okna.Classes
         }
         public Dictionary<string,string> GetValuesToChart(int userREF)
         {
-            List<string> values = new List<string>();
 
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
 
             using (SqlConnection cn = new SqlConnection(connectionString))
             {
-                string query = "SELECT measureDate, userWeight FROM History where userREF = " + userREF + " order by measureDate asc"; //formowanie zapytania
-                string value = ""; //zmienna przeochwujaca zwrocona wartosc pola
+                string query = "SELECT measureDate, userWeight FROM History where userREF = " + userREF + " order by userREF asc";
 
                 cn.Open();
 
-                SqlCommand command = new SqlCommand(query, cn);
+                SqlCommand command = new SqlCommand(query, cn); 
 
-                SqlDataReader dataReader = command.ExecuteReader(); //tworzy obeikt klasy i przypisuje do niego odpalone zpaytanie
+                SqlDataReader dataReader = command.ExecuteReader();
 
                 while(dataReader.Read())
                 {
                     try
                     {
-                        dictionary.Add(dataReader.GetValue(0).ToString(), dataReader.GetValue(1).ToString()); //uzupelniamy slowniak o wartosc daty i wagi
+                        dictionary.Add(dataReader.GetValue(0).ToString(), dataReader.GetValue(1).ToString());
                     }
                     catch
                     {
-                        continue; //pomijamy jesli juz taki rekord istnieje w slowniku
+                        continue;
                     }
                 }
 

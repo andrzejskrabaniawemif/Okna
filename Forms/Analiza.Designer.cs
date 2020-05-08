@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.comboBoxTarget = new System.Windows.Forms.ComboBox();
             this.comboBoxMacronutritions = new System.Windows.Forms.ComboBox();
             this.labelTarget = new System.Windows.Forms.Label();
@@ -48,6 +48,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonClear = new System.Windows.Forms.Button();
+            this.buttonExit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chartMacronutritions)).BeginInit();
             this.SuspendLayout();
             // 
@@ -179,18 +180,18 @@
             // 
             // chartMacronutritions
             // 
-            chartArea4.Name = "ChartArea1";
-            this.chartMacronutritions.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chartMacronutritions.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            this.chartMacronutritions.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartMacronutritions.Legends.Add(legend1);
             this.chartMacronutritions.Location = new System.Drawing.Point(140, 188);
             this.chartMacronutritions.Margin = new System.Windows.Forms.Padding(4);
             this.chartMacronutritions.Name = "chartMacronutritions";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series4.Legend = "Legend1";
-            series4.Name = "S1";
-            this.chartMacronutritions.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series1.Legend = "Legend1";
+            series1.Name = "S1";
+            this.chartMacronutritions.Series.Add(series1);
             this.chartMacronutritions.Size = new System.Drawing.Size(797, 396);
             this.chartMacronutritions.TabIndex = 18;
             // 
@@ -232,11 +233,23 @@
             this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
+            // buttonExit
+            // 
+            this.buttonExit.Location = new System.Drawing.Point(140, 149);
+            this.buttonExit.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(111, 28);
+            this.buttonExit.TabIndex = 23;
+            this.buttonExit.Text = "Wyjdź";
+            this.buttonExit.UseVisualStyleBackColor = true;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+            // 
             // Analiza
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(964, 607);
+            this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.buttonClear);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -256,7 +269,8 @@
             this.Controls.Add(this.comboBoxTarget);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Analiza";
-            this.Text = " ";
+            this.Text = " Analiza";
+            this.Load += new System.EventHandler(this.Analiza_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chartMacronutritions)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -282,5 +296,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonClear;
+        private System.Windows.Forms.Button buttonExit;
     }
 }

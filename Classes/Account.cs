@@ -18,13 +18,7 @@ namespace Okna.Classes
         public int height { get; set; }
         public int ID { get; set; }
 
-        /// <summary>
-        /// uzupelnienie danych obiektu klasu Account
-        /// </summary>
-        /// <param name="login"></param>
-        /// <param name="password"></param>
-        /// <param name="dateBirth"></param>
-        /// <param name="gender"></param>
+       
         public Account(string login, string password, string dateBirth, int gender, int height)
         {
             this.accountID = login;
@@ -40,17 +34,15 @@ namespace Okna.Classes
             this.password = password;
         }
         
-        public void SetOtherData()
+        public void SetOtherData() 
         {
             SQLConnection connection = new SQLConnection();
-            dateBirth = connection.GetField("dateBirth", "Users", "userLogin = '" + accountID + "'");
-            gender = Convert.ToInt32(connection.GetField("gender", "Users", "userLogin = '" + accountID + "'"));
-            height = Convert.ToInt32(connection.GetField("height", "Users", "userLogin = '" + accountID + "'"));
+            dateBirth = connection.GetField("dateBirth", "Users", "REF = " + ID);
+            gender = Convert.ToInt32(connection.GetField("gender", "Users", "REF = " + ID));
+            height = Convert.ToInt32(connection.GetField("height", "Users", "REF = " + ID));
         }
-        /// <summary>
-        /// dodanie nowego uztkownika
-        /// </summary>
-        public bool CreateAccount()
+        
+        public bool CreateAccount() //tworzenie nowego uzytkownika
         {
             if (VerifyLogin() == true)
             {
@@ -64,10 +56,6 @@ namespace Okna.Classes
         }
 
 
-        /// <summary>
-        /// porownuje loginy podczas zakladania konta
-        /// </summary>
-        /// <returns></returns>
         public bool VerifyLogin()
         {
             SQLConnection connection = new SQLConnection();
@@ -83,22 +71,13 @@ namespace Okna.Classes
                 return false; //istnieje taki login w bazie
             }
         }
-
-        ///metoda odpalajaca zapytanie, dodawanie uzytk. do tabeli
-        ///<param name="=query"></param>
-        ///
-
        
 
-        /// <summary>
-        /// sprawdza czy login istnieje w bazie i czy do danego loginu wpisane jest dobre haslo
-        /// </summary>
-        /// <returns> true - login i haslo prawidlowe, false lub haslo bledne</returns>
         public bool VerifyLoginandPassword()
         {
             SQLConnection connection = new SQLConnection();
 
-            string getPassword = connection.GetField("userPassword", "Users", "userLogin = '" + accountID + "'"); // wyciagniecie hasla przypisane do danego loginu
+            string getPassword = connection.GetField("userPassword", "Users", "userLogin = '" + accountID + "'");
 
             if (string.IsNullOrEmpty(getPassword))
             {
@@ -137,7 +116,7 @@ namespace Okna.Classes
             }
         }
        
-        public void SetUserID()
+        public void SetUserID()  
         {
             SQLConnection connection = new SQLConnection();
 

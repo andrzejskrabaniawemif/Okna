@@ -68,5 +68,14 @@ namespace Okna.Forms
             chartMacronutritions.Series["S1"].Points.Clear();
         }
 
+        private void Analiza_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }

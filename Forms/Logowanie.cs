@@ -14,8 +14,7 @@ namespace Okna
 {
     public partial class Logowanie : Form
     {
-        EkranPowitalny ekranPowitalny;
-
+        EkranPowitalny ekranPowitalny; 
         public Logowanie(EkranPowitalny ekranPowitalny)
         {
             this.ekranPowitalny = ekranPowitalny;
@@ -42,11 +41,19 @@ namespace Okna
             {
                 user.SetOtherData();
                 new BMRCPM(user).Show();
+                this.Hide();
             }
             else
             {
                 MessageBox.Show("Zły login lub hasło", "Informacja");
             }
+
+            
+        }
+
+        private void Logowanie_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

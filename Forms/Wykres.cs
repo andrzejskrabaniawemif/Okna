@@ -33,5 +33,16 @@ namespace Okna.Forms
 
          
         }
+
+        private void Wykres_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
     }
 }

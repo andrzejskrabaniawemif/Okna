@@ -43,6 +43,7 @@
             this.chartHistory.Legends.Add(legend1);
             this.chartHistory.Location = new System.Drawing.Point(0, 0);
             this.chartHistory.Name = "chartHistory";
+            this.chartHistory.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Berry;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Area;
             series1.Legend = "Legend1";
@@ -56,10 +57,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(917, 515);
+            this.ClientSize = new System.Drawing.Size(917, 519);
             this.Controls.Add(this.chartHistory);
             this.Name = "Wykres";
             this.Text = "Wykres histori zmian wagi";
+            this.Load += new System.EventHandler(this.Wykres_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chartHistory)).EndInit();
             this.ResumeLayout(false);
 

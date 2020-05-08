@@ -17,8 +17,8 @@ namespace Okna
         EkranPowitalny ekranPowitalny;
         public Rejestracja(EkranPowitalny ekranPowitalny)
         {
-            InitializeComponent();
             this.ekranPowitalny = ekranPowitalny;
+            InitializeComponent();
             dateTimePickerDateBirth.CustomFormat = "dd.MM.yyyy";
             dateTimePickerDateBirth.Format = DateTimePickerFormat.Custom;
             comboBoxGender.Text = "Wybierz płeć";
@@ -30,6 +30,7 @@ namespace Okna
 
             if (user.CreateAccount() == true)
             {
+                this.Hide();
                 new BMRCPM(user).Show();
             }
         }
@@ -43,6 +44,11 @@ namespace Okna
         {
             this.Hide();
             ekranPowitalny.Show();
+        }
+
+        private void Rejestracja_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

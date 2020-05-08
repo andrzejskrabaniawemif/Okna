@@ -44,6 +44,7 @@
             this.Analyze = new System.Windows.Forms.Button();
             this.dateTimePickerDate = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
+            this.buttonReturn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeight)).BeginInit();
             this.SuspendLayout();
             // 
@@ -182,7 +183,7 @@
             this.Analyze.Name = "Analyze";
             this.Analyze.Size = new System.Drawing.Size(245, 50);
             this.Analyze.TabIndex = 24;
-            this.Analyze.Text = "Peła analiza";
+            this.Analyze.Text = "Pełna analiza";
             this.Analyze.UseVisualStyleBackColor = true;
             this.Analyze.Click += new System.EventHandler(this.Analyze_Click);
             // 
@@ -203,11 +204,23 @@
             this.label3.TabIndex = 25;
             this.label3.Text = "Data";
             // 
+            // buttonReturn
+            // 
+            this.buttonReturn.Location = new System.Drawing.Point(119, 533);
+            this.buttonReturn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonReturn.Name = "buttonReturn";
+            this.buttonReturn.Size = new System.Drawing.Size(245, 50);
+            this.buttonReturn.TabIndex = 27;
+            this.buttonReturn.Text = "Powrót";
+            this.buttonReturn.UseVisualStyleBackColor = true;
+            this.buttonReturn.Click += new System.EventHandler(this.buttonReturn_Click);
+            // 
             // BMRCPM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 607);
+            this.ClientSize = new System.Drawing.Size(397, 606);
+            this.Controls.Add(this.buttonReturn);
             this.Controls.Add(this.dateTimePickerDate);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Analyze);
@@ -227,6 +240,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "BMRCPM";
             this.Text = "Obliczanie BMR i CPM";
+            this.Load += new System.EventHandler(this.BMRCPM_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -250,5 +264,6 @@
         private System.Windows.Forms.Button Analyze;
         private System.Windows.Forms.DateTimePicker dateTimePickerDate;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonReturn;
     }
 }

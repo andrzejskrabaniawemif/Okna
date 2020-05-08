@@ -16,7 +16,9 @@ namespace Okna.Forms
 {
     public partial class BMRCPM : Form
     {
+
         Account user;
+       
         int age;
         decimal CPM;
         public BMRCPM(Account user)
@@ -33,14 +35,13 @@ namespace Okna.Forms
 
         }
 
+       
         public int CalculateAge()
         {
             var today = DateTime.Today;
             string pattern = "dd.MM.yyyy";
             var birthDate = DateTime.ParseExact(user.dateBirth, pattern, null);
-            //obliczamy wiek
             var age = today.Year - birthDate.Year;
-            //sprawdzamy czy uzytkownik mial urodziny w tym roku czy nie
             if (birthDate.Date > today.AddYears(-age))
             {
                 age--;
@@ -78,7 +79,20 @@ namespace Okna.Forms
 
         private void Analyze_Click(object sender, EventArgs e)
         {
+            this.Hide();
             new Analiza(user, CPM).Show();
+            
+        }
+
+        private void BMRCPM_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonReturn_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            new EkranPowitalny().Show();
         }
     }
 }

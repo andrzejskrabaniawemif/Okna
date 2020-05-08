@@ -64,6 +64,7 @@
             this.buttonExit.TabIndex = 2;
             this.buttonExit.Text = "Wyjście";
             this.buttonExit.UseVisualStyleBackColor = true;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
             // EkranPowitalny
             // 

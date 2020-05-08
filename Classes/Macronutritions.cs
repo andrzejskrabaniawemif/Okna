@@ -36,7 +36,7 @@ namespace DietCalc.Classes
          
         public decimal CalcFat(decimal CPM, decimal target, int macro)
         {
-            if (macro == 0)
+            if (macro == 1)
             {
                 return ((CPM * target) / 7)*0.3M;
             }
@@ -48,7 +48,7 @@ namespace DietCalc.Classes
 
         public decimal CalcCarbo(decimal CPM, decimal target, int macro)
         {
-            if (macro == 0)
+            if (macro == 2)
             {
                 return ((CPM * target) / 7) * 0.5M;
             }
