@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,7 +19,7 @@ namespace Okna.Forms
         public Wykres(Account user)
         {
             this.user = user;
-
+            Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture("pl-PL");
             InitializeComponent();
 
             SQLConnection connection = new SQLConnection();
@@ -26,9 +28,12 @@ namespace Okna.Forms
 
             dictionary = connection.GetValuesToChart(user.ID);
 
-            foreach(KeyValuePair<string,string> kvp in dictionary)
+            string pattern = "dd.MM.yyyy";
+            
+
+            foreach (KeyValuePair<string,string> kvp in dictionary)
             {
-                chartHistory.Series["Waga"].Points.AddXY(kvp.Key, kvp.Value);
+                chartHistory.Series["Waga"].Points.AddXY(DateTime.ParseExact(kvp.Key, pattern, CultureInfo.InvariantCulture), Convert.ToDecimal(kvp.Value));
             }
 
          

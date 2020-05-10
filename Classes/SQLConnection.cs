@@ -80,7 +80,7 @@ namespace Okna.Classes
                     }
                     catch
                     {
-                        continue;
+                        continue; //pomijamy jesli juz taki rekord istnieje w slowniku
                     }
                 }
 
